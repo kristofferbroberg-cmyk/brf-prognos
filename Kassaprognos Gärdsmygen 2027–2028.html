@@ -1,0 +1,459 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kassaprognos Gärdsmygen 2027–2028</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: same frame as Kassaflöde 2025, summary figures above, scenario switches over one wide 24-month forecast chart, loan detail and assumptions below. */
+:root {
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #7a7873;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --base: #8d8b85;
+  --wash: rgba(11,11,11,0.06);
+  --chip-on: rgba(27,175,122,0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a9890;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --base: #8a8882; --wash: rgba(255,255,255,0.07);
+    --chip-on: rgba(25,158,112,0.20);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a9890;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --base: #8a8882; --wash: rgba(255,255,255,0.07);
+  --chip-on: rgba(25,158,112,0.20);
+  color-scheme: dark;
+}
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  line-height: 1.45;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1 { font-size: 22px; font-weight: 650; margin: 0; text-wrap: balance; }
+h2 { font-size: 13px; font-weight: 650; margin: 0; color: var(--ink-2); letter-spacing: 0.02em; }
+.sub { margin: 4px 0 0; color: var(--ink-2); font-size: 14px; max-width: 72ch; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.stat .l { font-size: 12.5px; color: var(--ink-2); }
+.stat .v { font-size: 22px; font-weight: 600; margin-top: 2px; }
+.stat .n { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 14px 12px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.scen { display: flex; flex-direction: column; gap: 8px; padding: 0 4px 12px; border-bottom: 1px solid var(--grid); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: flex-start; gap: 8px; border: 1px solid var(--axis); border-radius: 10px; padding: 8px 12px; cursor: pointer; max-width: 100%; min-width: 0; }
+.chip:hover { background: var(--wash); }
+.chip:has(input:checked) { background: var(--chip-on); border-color: var(--s3); }
+.chip input { margin: 2px 0 0; accent-color: var(--s3); width: 16px; height: 16px; flex: none; }
+.chip input:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.chip .t { font-size: 13.5px; font-weight: 600; color: var(--ink); display: block; }
+.chip .d { font-size: 12px; color: var(--ink-2); display: block; }
+.cardhead { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; padding-inline: 4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw-bar { width: 10px; height: 10px; border-radius: 2px; }
+.sw-dash { width: 18px; height: 0; border-top: 2px dashed var(--s3); }
+.sw-base { width: 18px; height: 0; border-top: 2px dotted var(--base); }
+.sw-dia { width: 9px; height: 9px; transform: rotate(45deg); }
+button.toggle { font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 1px solid var(--axis); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
+button.toggle:hover { background: var(--wash); }
+button.toggle:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+#chart { position: relative; width: 100%; }
+#chart svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
+#chart text { fill: var(--muted); font-size: 11px; font-family: inherit; }
+#chart text.yr { fill: var(--ink-2); font-size: 12px; font-weight: 600; }
+#chart text.lbl { fill: var(--ink); font-size: 11.5px; font-weight: 600; }
+#tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.5; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 210px; z-index: 5; }
+#tip .th { font-weight: 650; margin-bottom: 3px; }
+#tip .row { display: flex; justify-content: space-between; gap: 14px; }
+#tip .row span:first-child { color: var(--ink-2); }
+#tip .row b { font-weight: 600; }
+#tip hr { border: 0; border-top: 1px solid var(--grid); margin: 4px 0; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--ink-2); font-weight: 600; }
+tr.yrrow td { font-weight: 650; background: var(--wash); }
+tfoot td { font-weight: 650; border-bottom: 0; }
+.acc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; min-width: 0; }
+.acc > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; font-size: 14px; font-weight: 600; color: var(--ink); border-radius: 12px; }
+.acc > summary::-webkit-details-marker { display: none; }
+.acc > summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--ink-2); border-bottom: 2px solid var(--ink-2); transform: rotate(45deg); margin-top: -4px; transition: transform .15s; flex: none; }
+.acc[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+.acc > summary:hover { background: var(--wash); }
+.acc > summary:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.accbody { padding: 0 18px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+@media (prefers-reduced-motion: reduce) { .acc > summary::after { transition: none; } }
+.lead { margin: 0; font-size: 14px; color: var(--ink); max-width: 84ch; }
+#loan-table td.hl, #loan-table th.hl { background: var(--chip-on); }
+.notes { display: flex; flex-direction: column; gap: 10px; max-width: 80ch; }
+.notes p, .notes ul { font-size: 13px; color: var(--ink-2); margin: 0; }
+.notes ul { padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.notes b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Kassaprognos 2027–2028</h1>
+    <p class="sub">Brf Gärdsmygen 2o7. Prognos för inbetalningar, utbetalningar och kassans saldo per månad, januari 2027–december 2028, utifrån läget i oktober 2026. Slå på scenarier för att se hur de påverkar kassan.</p>
+  </header>
+
+  <section class="stats" id="stats" aria-label="Sammanfattning"></section>
+
+  <section class="card">
+    <div class="scen">
+      <h2 id="scen-h">Scenarier</h2>
+      <div class="chips" id="chips" role="group" aria-labelledby="scen-h"></div>
+    </div>
+    <div class="cardhead">
+      <div class="legend" id="legend" aria-label="Förklaring"></div>
+      <button class="toggle" id="toggle" type="button" aria-pressed="false">Visa som tabell</button>
+    </div>
+    <div id="chart"><div id="tip" hidden></div></div>
+    <div class="tablewrap" id="tablewrap" hidden></div>
+  </section>
+
+  <details class="acc" id="loanbox" hidden>
+    <summary>Investeringar: lånekostnader per månad</summary>
+    <div class="accbody">
+      <p class="lead" id="loan-sum"></p>
+      <div class="tablewrap" id="loan-table"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Så är prognosen beräknad</summary>
+    <div class="accbody notes">
+    <p><b>Så är grundprognosen gjord.</b> Den bygger bara på föreningens egna siffror:</p>
+    <ul>
+      <li><b>Ingående kassa</b> ca 372 000 kr: kassan per 31 oktober 2026 (300 825 kr) plus kassaflödet i november–december 2025 (ca +71 000 kr).</li>
+      <li><b>Månadsmönster</b> från 2025, rekonstruerat ur verifikationslistan. Det fångar när i året pengar kommer in och går ut. Rekonstruktionen slutar 23 080 kr under det bokförda saldot för 2025, så månadsbeloppen är ungefärliga.</li>
+      <li><b>2027:</b> inbetalningar +2,0 % och utbetalningar +8,2 % mot 2025. Det är samma förändring som i resultatrapporten jan–okt 2026 jämfört med jan–okt 2025, utan reparationer och planerat underhåll.</li>
+      <li><b>2028:</b> samma nivå som 2027. Ingen ytterligare uppräkning av intäkter eller kostnader.</li>
+    </ul>
+    <p><b>Avgiftshöjning 5 %</b> räknas på årsavgifterna för bostäderna, i snitt 95 633 kr per månad under jan–okt 2026. Den ger ca 4 800 kr mer per månad från januari 2027, eller ca 57 000 kr per år, under både 2027 och 2028. Hyror, p-platser och bredband påverkas inte.</p>
+    <p><b>Fjärrvärmecentral och takrenovering</b> finansieras med lån på 400 000 kr (februari 2027) och 3 000 000 kr (september 2027). Lånen går direkt till investeringarna, så lånebeloppen påverkar inte kassan. Det som syns är räntan och amorteringen, som betalas månadsvis från månaden efter att lånet tas. Räntan är 4 % på utestående skuld. Amorteringen är 4,1 % av lånebeloppet per år, samma snitt som för det befintliga lånet: 75 000 kr på 22 månader (2025 och jan–okt 2026).</p>
+    <p><b>Ingår inte:</b> övriga reparationer och planerat underhåll, ändrade räntor och engångsposter. 2025 års utbetalningar kan ändå innehålla en del underhåll, eftersom verifikationslistan saknar konton och det inte går att sortera bort. Alla belopp i grafen är avrundade till tusental kronor.</p>
+    </div>
+  </details>
+</div>
+
+<script>
+(function () {
+  var MON = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+  var FULL = ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+  var N = 24, Y0 = 2027;
+  var IN27  = [118159,104440,121714,106332,123880,106467,106332,118163,111701,117371,95522,129738];
+  var OUT27 = [99938,148852,141998,205334,78721,103685,110463,77310,50768,74433,72540,89210];
+  var IN = IN27.concat(IN27), OUT = OUT27.concat(OUT27); /* 2028 = 2027 års nivå */
+  var OPEN = 372193;
+  var FEE_MONTH = 95633; /* årsavgifter bostäder, snitt per månad jan–okt 2026 */
+  var LOAN_RATE = 0.04;
+  var LOAN_AMORT = 0.041; /* snitt för befintligt lån: 75 000 kr på 22 månader, ca 40 900 kr/år på ca 1 000 000 kr */
+
+  function yearOf(i) { return Y0 + Math.floor(i / 12); }
+  function monName(i) { return FULL[i % 12]; }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function mLabel(i) { return cap(monName(i)) + ' ' + yearOf(i); }
+  function zeros() { var a = []; for (var i = 0; i < N; i++) a.push(0); return a; }
+
+  /* A loan that goes straight into an investment: the loan amount has no cash effect, only interest and amortization do. Payments start the month after the loan. */
+  function loanScenario(id, title, defName, amount, start) {
+    return {
+      id: id, loan: true,
+      name: title,
+      desc: 'Lån ' + new Intl.NumberFormat('sv-SE').format(amount) + ' kr i ' + monName(start) + ' ' + yearOf(start) + ', investeras direkt. Ränta 4 % och amortering 4,1 % per år från ' + monName(start + 1),
+      apply: function (inA, outA, info) {
+        var L = amount, am = amount * LOAN_AMORT / 12, first = 0;
+        for (var i = start + 1; i < N; i++) {
+          var r = L * LOAN_RATE / 12;
+          if (!first) first = r + am;
+          outA[i] += r + am; info.loanCost[i] += r + am; info.loanInt[i] += r; info.loanAm[i] += am; L -= am;
+          if (i === 11) info.loanEnd27 += L;
+        }
+        if (start + 1 > 11) info.loanEnd27 += amount;
+        info.loanPayout += amount; info.loanEnd += L;
+        info.loans.push({ label: defName, amount: amount, start: start, first: first, full: amount * (LOAN_RATE + LOAN_AMORT) });
+      }
+    };
+  }
+
+  /* Scenarios: each one changes the monthly inflow/outflow arrays. Add new ones to this list. */
+  var SCEN = [
+    {
+      id: 'avg5',
+      name: 'Avgiftshöjning 5 %',
+      desc: 'Årsavgifterna höjs från 1 januari 2027, ca +4 800 kr per månad',
+      apply: function (inA) { for (var i = 0; i < N; i++) inA[i] += FEE_MONTH * 0.05; }
+    },
+    loanScenario('lan400', 'Fjärrvärmecentral', 'fjärrvärmecentralen', 400000, 1),   /* februari 2027 */
+    loanScenario('lan3m', 'Takrenovering', 'takrenoveringen', 3000000, 8)              /* september 2027 */
+  ];
+  var active = {};
+  try { var saved = JSON.parse(localStorage.getItem('kassaprognos27-scen') || '{}'); if (saved && typeof saved === 'object') active = saved; } catch (e) {}
+
+  var nf = new Intl.NumberFormat('sv-SE');
+  function r1k(v) { return Math.round(v / 1000) * 1000; }
+  function n(v) { v = r1k(v); return v < 0 ? '−' + nf.format(-v) : nf.format(v); }
+  function sg(v) { return (r1k(v) > 0 ? '+' : '') + n(v); }
+  function n100(v) { var r = Math.round(v / 100) * 100; return r < 0 ? '−' + nf.format(-r) : nf.format(r); }
+  function sg100(v) { var r = Math.round(v / 100) * 100; return (r > 0 ? '+' : r < 0 ? '−' : '') + nf.format(Math.abs(r)); }
+  function kr(v) { return nf.format(Math.round(v)); }
+  function sum(a, from, to) { var s = 0; for (var i = (from || 0); i < (to === undefined ? a.length : to); i++) s += a[i]; return s; }
+  function cum(inA, outA) { var b = OPEN, r = []; for (var i = 0; i < N; i++) { b += inA[i] - outA[i]; r.push(b); } return r; }
+  var BASE = cum(IN, OUT);
+
+  function anyActive() { return SCEN.some(function (s) { return active[s.id]; }); }
+  function compute(skipLoans) {
+    var inA = IN.slice(), outA = OUT.slice();
+    var info = { loanCost: zeros(), loanInt: zeros(), loanAm: zeros(), loanPayout: 0, loanEnd: 0, loanEnd27: 0, loans: [] };
+    SCEN.forEach(function (s) { if (active[s.id] && !(skipLoans && s.loan)) s.apply(inA, outA, info); });
+    return { inA: inA, outA: outA, info: info, bal: cum(inA, outA) };
+  }
+
+  var chips = document.getElementById('chips');
+  SCEN.forEach(function (s) {
+    var lab = document.createElement('label'); lab.className = 'chip'; lab.setAttribute('for', 'sc-' + s.id);
+    lab.innerHTML = '<input type="checkbox" id="sc-' + s.id + '"' + (active[s.id] ? ' checked' : '') + '><span><span class="t">' + s.name + '</span><span class="d">' + s.desc + '</span></span>';
+    chips.appendChild(lab);
+    lab.querySelector('input').addEventListener('change', function (e) {
+      active[s.id] = e.target.checked;
+      try { localStorage.setItem('kassaprognos27-scen', JSON.stringify(active)); } catch (err) {}
+      update();
+    });
+  });
+
+  var stats = document.getElementById('stats');
+  var legend = document.getElementById('legend');
+  var tw = document.getElementById('tablewrap');
+  var toggle = document.getElementById('toggle'), chartEl = document.getElementById('chart');
+  var tip = document.getElementById('tip');
+  var state = compute();
+
+  function renderStats() {
+    var on = anyActive(), s = state;
+    var minI = s.bal.indexOf(Math.min.apply(null, s.bal));
+    var bMin = BASE.indexOf(Math.min.apply(null, BASE));
+    function vsBase(i) { return on ? 'Grundprognos ca ' + n(BASE[i]) + ' kr (' + sg(s.bal[i] - BASE[i]) + ' kr)' : ''; }
+    var net27 = sum(s.inA, 0, 12) - sum(s.outA, 0, 12), net28 = sum(s.inA, 12, 24) - sum(s.outA, 12, 24);
+    var items = [
+      ['Kassa 31 dec 2027', 'ca ' + n(s.bal[11]) + ' kr', on ? vsBase(11) : 'Från ca ' + n(OPEN) + ' kr vid ingången'],
+      ['Kassa 31 dec 2028', 'ca ' + n(s.bal[23]) + ' kr', (on ? vsBase(23) : 'Prognos') + (s.info.loanPayout ? '. Skuld på nya lån ca ' + n(s.info.loanEnd) + ' kr' : '')],
+      ['Lägsta kassa', 'ca ' + n(s.bal[minI]) + ' kr', 'I slutet av ' + monName(minI) + ' ' + yearOf(minI) + (on ? '. Grundprognos ca ' + n(BASE[bMin]) + ' kr' : '')],
+      ['Netto kassaflöde 2028', sg(net28) + ' kr', '2027: ' + sg(net27) + ' kr']
+    ];
+    stats.innerHTML = '';
+    items.forEach(function (it) {
+      var d = document.createElement('div'); d.className = 'stat';
+      d.innerHTML = '<div class="l">' + it[0] + '</div><div class="v">' + it[1] + '</div><div class="n">' + it[2] + '</div>';
+      stats.appendChild(d);
+    });
+  }
+
+  function renderLegend() {
+    var on = anyActive();
+    legend.innerHTML =
+      '<span><i class="sw-bar" style="background:var(--s1)"></i>Inbetalningar</span>' +
+      '<span><i class="sw-bar" style="background:var(--s2)"></i>Utbetalningar</span>' +
+      '<span><i class="sw-dash"></i>' + (on ? 'Kassa med scenarier' : 'Kassa, prognos') + '</span>' +
+      (on ? '<span><i class="sw-base"></i>Grundprognos</span>' : '') +
+      '<span><i class="sw-dia" style="background:var(--s3)"></i>Beräknad kassa 31 dec 2026</span>';
+  }
+
+  function renderTable() {
+    var on = anyActive(), s = state;
+    var cols = on ? 6 : 5;
+    var head = '<tr><th>Månad</th><th>Inbetalningar</th><th>Utbetalningar</th><th>Netto</th><th>' + (on ? 'Kassa med scenarier' : 'Kassa, prognos') + '</th>' + (on ? '<th>Grundprognos</th>' : '') + '</tr>';
+    var rows = '<tr><td>Ingående, 31 dec 2026 (beräknad)</td><td></td><td></td><td></td><td>' + n(OPEN) + '</td>' + (on ? '<td>' + n(OPEN) + '</td>' : '') + '</tr>';
+    for (var i = 0; i < N; i++) {
+      rows += '<tr><td>' + mLabel(i) + '</td><td>' + n(s.inA[i]) + '</td><td>' + n(s.outA[i]) + '</td><td>' + sg(s.inA[i] - s.outA[i]) + '</td><td>' + n(s.bal[i]) + '</td>' + (on ? '<td>' + n(BASE[i]) + '</td>' : '') + '</tr>';
+      if (i === 11 || i === 23) {
+        var a = i - 11, b = i + 1, ti = sum(s.inA, a, b), to = sum(s.outA, a, b);
+        rows += '<tr class="yrrow"><td>Totalt ' + yearOf(i) + '</td><td>' + n(ti) + '</td><td>' + n(to) + '</td><td>' + sg(ti - to) + '</td><td>' + n(s.bal[i]) + '</td>' + (on ? '<td>' + n(BASE[i]) + '</td>' : '') + '</tr>';
+      }
+    }
+    tw.innerHTML = '<table><thead>' + head + '</thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  var loanbox = document.getElementById('loanbox'), loanSum = document.getElementById('loan-sum'), loanTw = document.getElementById('loan-table');
+  function renderLoan() {
+    var s = state;
+    if (!s.info.loanPayout) { loanbox.hidden = true; return; }
+    loanbox.hidden = false;
+    var wo = compute(true);
+    var many = s.info.loans.length > 1;
+    var parts = s.info.loans.map(function (l) { return l.label + ' (lån ' + nf.format(l.amount) + ' kr i ' + monName(l.start) + ' ' + yearOf(l.start) + ', ca ' + n100(l.first) + ' kr mer per månad från ' + monName(l.start + 1) + ')'; });
+    var c27 = sum(s.info.loanCost, 0, 12), c28 = sum(s.info.loanCost, 12, 24);
+    loanSum.textContent = cap(parts.join(' och ')) + ' finansieras med lån som går direkt till ' + (many ? 'investeringarna' : 'investeringen') +
+      ', så lånebeloppen påverkar inte kassan. Ränta och amortering blir ' + kr(c27) + ' kr under 2027 och ' + kr(c28) + ' kr under 2028, när ' + (many ? 'lånen' : 'lånet') + ' belastar hela året. ' +
+      'Kassan är ca ' + n100(wo.bal[11] - s.bal[11]) + ' kr lägre än utan ' + (many ? 'investeringarna' : 'investeringen') + ' vid slutet av 2027 och ca ' + n100(wo.bal[23] - s.bal[23]) + ' kr lägre vid slutet av 2028. ' +
+      'Skulden på ' + (many ? 'de nya lånen' : 'det nya lånet') + ' är ' + kr(s.info.loanEnd27) + ' kr vid slutet av 2027 och ' + kr(s.info.loanEnd) + ' kr vid slutet av 2028.';
+    var rows = '';
+    for (var i = 0; i < N; i++) {
+      rows += '<tr><td>' + mLabel(i) + '</td><td>' + (s.info.loanInt[i] ? kr(s.info.loanInt[i]) : '') + '</td><td>' + (s.info.loanAm[i] ? kr(s.info.loanAm[i]) : '') +
+        '</td><td class="hl">' + (s.info.loanCost[i] ? '+' + kr(s.info.loanCost[i]) : '') + '</td><td>' + n100(wo.outA[i]) + '</td><td>' + n100(s.outA[i]) + '</td><td>' + n100(wo.bal[i]) + '</td><td>' + n100(s.bal[i]) + '</td><td class="hl">' + sg100(s.bal[i] - wo.bal[i]) + '</td></tr>';
+      if (i === 11 || i === 23) {
+        var a = i - 11, b = i + 1;
+        rows += '<tr class="yrrow"><td>Totalt ' + yearOf(i) + '</td><td>' + kr(sum(s.info.loanInt, a, b)) + '</td><td>' + kr(sum(s.info.loanAm, a, b)) + '</td><td class="hl">+' + kr(sum(s.info.loanCost, a, b)) + '</td><td>' + n100(sum(wo.outA, a, b)) + '</td><td>' + n100(sum(s.outA, a, b)) + '</td><td>' + n100(wo.bal[i]) + '</td><td>' + n100(s.bal[i]) + '</td><td class="hl">' + sg100(s.bal[i] - wo.bal[i]) + '</td></tr>';
+      }
+    }
+    loanTw.innerHTML = '<table><thead><tr><th>Månad</th><th>Ränta</th><th>Amortering</th><th class="hl">Mer i utbetalningar</th><th>Utbetalningar utan investeringar</th><th>Utbetalningar med investeringar</th><th>Kassa utan investeringar</th><th>Kassa med investeringar</th><th class="hl">Skillnad i kassa</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  toggle.addEventListener('click', function () {
+    var showTable = tw.hidden;
+    tw.hidden = !showTable; chartEl.hidden = showTable;
+    toggle.setAttribute('aria-pressed', String(showTable));
+    toggle.textContent = showTable ? 'Visa som diagram' : 'Visa som tabell';
+    if (!showTable) render();
+  });
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs, parent) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function barPath(x, w, yTop, yBase) {
+    var r = Math.min(4, w / 2, Math.max(0, yBase - yTop));
+    return 'M' + x + ',' + yBase + ' L' + x + ',' + (yTop + r) + ' Q' + x + ',' + yTop + ' ' + (x + r) + ',' + yTop +
+      ' L' + (x + w - r) + ',' + yTop + ' Q' + (x + w) + ',' + yTop + ' ' + (x + w) + ',' + (yTop + r) + ' L' + (x + w) + ',' + yBase + ' Z';
+  }
+  function diamond(cx, cy, s) {
+    return 'M' + cx + ',' + (cy - s) + ' L' + (cx + s) + ',' + cy + ' L' + cx + ',' + (cy + s) + ' L' + (cx - s) + ',' + cy + ' Z';
+  }
+
+  function render() {
+    var old = chartEl.querySelector('svg'); if (old) old.remove();
+    var s = state, on = anyActive();
+    var w = Math.max(300, chartEl.clientWidth);
+    var narrow = w < 640;
+    var h = narrow ? 330 : 400;
+    var m = { l: narrow ? 44 : 56, r: 12, t: 30, b: 46 };
+    var pw = w - m.l - m.r, ph = h - m.t - m.b;
+    var slots = N + 1, slot = pw / slots;
+    var top = Math.max(OPEN, Math.max.apply(null, s.bal), Math.max.apply(null, BASE), Math.max.apply(null, s.inA), Math.max.apply(null, s.outA));
+    var YMAX = Math.max(500000, Math.ceil(top / 100000) * 100000);
+    function cx(i) { return m.l + slot * (i + 0.5); }
+    function y(v) { return m.t + ph * (1 - v / YMAX); }
+    var y0 = y(0);
+
+    var svg = el('svg', { viewBox: '0 0 ' + w + ' ' + h, role: 'img', 'aria-label': 'Stapeldiagram över prognostiserade inbetalningar och utbetalningar per månad 2027–2028 med kassans prognostiserade saldo som streckad linje' + (on ? ' och grundprognosen som prickad linje' : '') + '. Samma uppgifter finns i tabellvyn.' });
+    chartEl.insertBefore(svg, tip);
+
+    for (var v = 0; v <= YMAX; v += 100000) {
+      el('line', { x1: m.l, x2: w - m.r, y1: y(v), y2: y(v), stroke: v === 0 ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1 }, svg);
+      var t = el('text', { x: m.l - 8, y: y(v) + 4, 'text-anchor': 'end' }, svg);
+      t.textContent = v === 0 ? '0' : (v / 1000) + ' tkr';
+    }
+    /* year divider and labels */
+    var xDiv = m.l + slot * 13;
+    el('line', { x1: xDiv, x2: xDiv, y1: m.t, y2: h - 6, stroke: 'var(--axis)', 'stroke-width': 1 }, svg);
+    [[1, 12, '2027'], [13, 24, '2028']].forEach(function (g) {
+      var yt = el('text', { x: (cx(g[0]) + cx(g[1])) / 2, y: h - 6, 'text-anchor': 'middle', 'class': 'yr' }, svg);
+      yt.textContent = g[2];
+    });
+    for (var i = 0; i <= N; i++) {
+      if (i > 0 && narrow && (i - 1) % 3 !== 0) continue;
+      var xt = el('text', { x: cx(i), y: h - 24, 'text-anchor': 'middle' }, svg);
+      xt.textContent = i === 0 ? 'ing.' : MON[(i - 1) % 12];
+    }
+
+    var band = el('rect', { x: 0, y: m.t, width: slot, height: ph, fill: 'var(--wash)', visibility: 'hidden' }, svg);
+
+    var bw = Math.max(3, Math.min(24, (slot - 6) / 2));
+    for (var j = 1; j <= N; j++) {
+      var c = cx(j);
+      el('path', { d: barPath(c - 1 - bw, bw, y(s.inA[j - 1]), y0), fill: 'var(--s1)' }, svg);
+      el('path', { d: barPath(c + 1, bw, y(s.outA[j - 1]), y0), fill: 'var(--s2)' }, svg);
+    }
+
+    function linePts(arr) {
+      var p = [cx(0) + ',' + y(OPEN)];
+      for (var k = 0; k < N; k++) p.push(cx(k + 1) + ',' + y(arr[k]));
+      return p.join(' ');
+    }
+    if (on) {
+      el('polyline', { points: linePts(BASE), fill: 'none', stroke: 'var(--base)', 'stroke-width': 2, 'stroke-dasharray': '1 4', 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    }
+    el('polyline', { points: linePts(s.bal), fill: 'none', stroke: 'var(--s3)', 'stroke-width': 2, 'stroke-dasharray': '6 4', 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    var rDot = slot < 18 ? 3 : 4;
+    for (var q = 1; q <= N; q++) {
+      el('circle', { cx: cx(q), cy: y(s.bal[q - 1]), r: rDot, fill: 'var(--s3)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+    }
+    el('path', { d: diamond(cx(0), y(OPEN), 6), fill: 'var(--s3)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+
+    if (!narrow) {
+      var l1 = el('text', { x: m.l + 4, y: y(OPEN) - 26, 'text-anchor': 'start', 'class': 'lbl' }, svg);
+      l1.textContent = 'Beräknat ca ' + n(OPEN) + ' kr';
+      var l2 = el('text', { x: cx(N) + 8, y: y(s.bal[N - 1]) - 14, 'text-anchor': 'end', 'class': 'lbl' }, svg);
+      l2.textContent = (on ? 'Med scenarier ca ' : 'Prognos ca ') + n(s.bal[N - 1]) + ' kr';
+    }
+
+    var hit = el('rect', { x: m.l, y: 0, width: pw, height: h, fill: 'transparent' }, svg);
+
+    function show(evt) {
+      var r = svg.getBoundingClientRect();
+      var px = (evt.clientX - r.left) * (w / r.width);
+      var idx = Math.max(0, Math.min(N, Math.floor((px - m.l) / slot)));
+      band.setAttribute('x', m.l + slot * idx); band.setAttribute('visibility', 'visible');
+      var html;
+      if (idx === 0) {
+        html = '<div class="th">Ingående, 31 dec 2026</div><div class="row"><span>Kassa, beräknad</span><b>' + n(OPEN) + ' kr</b></div>';
+      } else {
+        var k = idx - 1, a = s.inA[k], b = s.outA[k];
+        html = '<div class="th">' + mLabel(k) + ', prognos</div>' +
+          '<div class="row"><span>Inbetalningar</span><b>' + n(a) + ' kr</b></div>' +
+          '<div class="row"><span>Utbetalningar</span><b>' + n(b) + ' kr</b></div>' +
+          (s.info.loanCost[k] ? '<div class="row"><span>varav ränta och amortering, nya lån</span><b>' + n100(s.info.loanCost[k]) + ' kr</b></div>' : '') +
+          '<div class="row"><span>Netto</span><b>' + sg(a - b) + ' kr</b></div>' +
+          '<hr><div class="row"><span>' + (on ? 'Kassa med scenarier' : 'Kassa vid månadens slut') + '</span><b>' + n(s.bal[k]) + ' kr</b></div>' +
+          (on ? '<div class="row"><span>Grundprognos</span><b>' + n(BASE[k]) + ' kr</b></div><div class="row"><span>Skillnad</span><b>' + sg(s.bal[k] - BASE[k]) + ' kr</b></div>' : '');
+      }
+      tip.innerHTML = html; tip.hidden = false;
+      var scale = r.width / w;
+      var tx = (cx(idx) * scale) + 14, tw2 = tip.offsetWidth;
+      if (tx + tw2 > r.width) tx = (cx(idx) * scale) - tw2 - 14;
+      tip.style.left = Math.max(0, tx) + 'px';
+      tip.style.top = Math.max(0, (m.t + 6) * scale) + 'px';
+    }
+    function hide() { band.setAttribute('visibility', 'hidden'); tip.hidden = true; }
+    hit.addEventListener('pointermove', show);
+    hit.addEventListener('pointerdown', show);
+    hit.addEventListener('pointerleave', hide);
+  }
+
+  function update() {
+    state = compute();
+    renderStats(); renderLegend(); renderTable(); renderLoan();
+    if (!chartEl.hidden) render();
+  }
+
+  update();
+  if (window.ResizeObserver) {
+    var lastW = 0;
+    new ResizeObserver(function () { var cw = chartEl.clientWidth; if (cw !== lastW) { lastW = cw; if (!chartEl.hidden) render(); } }).observe(chartEl);
+  } else {
+    window.addEventListener('resize', function () { if (!chartEl.hidden) render(); });
+  }
+})();
+</script>
+
+</body></html>
